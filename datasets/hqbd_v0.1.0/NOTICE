@@ -1,0 +1,70 @@
+HQBD v0.1.0 — NOTICE
+
+This release combines two upstream benchmark sources. The HQBD packaging
+(renamed IDs, unified index, mappings, runnability metadata) is provided with
+the release; the upstream terms below continue to apply to the included
+content.
+
+================================================================================
+CVDP v1.1.0
+================================================================================
+
+Source: CVDP (Comprehensive Verilog Design Problems) benchmark, version 1.1.0.
+Included content: 872 cases copied from HQBD v0.0.1, which in turn derives from
+CVDP v1.1.0. The seven JSONL files are byte-for-byte copies with only the
+filename version prefix changed.
+
+Modifications: case IDs were renamed from cvdp_* to hqbd_* in HQBD v0.0.1.
+Case content, prompts, contexts, harnesses, and metadata are unchanged. See the
+release-level LICENSE file and the upstream CVDP distribution for the full
+terms, including the no-commercial and commercial split conditions.
+
+================================================================================
+HWE-bench 0.1.0
+================================================================================
+
+Source project: https://github.com/pku-liang/hwe-bench
+Paper: arXiv:2604.14709
+Version: 0.1.0 (local snapshot dated 2026-09-09)
+License: Apache License 2.0. A copy is included as LICENSE-HWE-bench.
+
+Included content: all 417 bug-repair cases from the upstream
+hwe_bench_full.jsonl, in native HWE format, merged and split by repository.
+
+Modifications:
+- the numeric GitHub pull-request id was renamed source_pr_id;
+- the top-level id was replaced with hqbd_hwe_<repo_slug>_<pr-number>;
+- hqbd_* provenance and runnability fields were appended;
+- records were regrouped into per-repository files.
+No native upstream field was removed or altered.
+
+Upstream repositories represented in the HWE-bench portion:
+
+  lowRISC/opentitan
+  OpenXiangShan/XiangShan
+  lowRISC/ibex
+  openhwgroup/cva6
+  chipsalliance/rocket-chip
+  chipsalliance/caliptra-rtl
+
+The HWE-bench dataset declares Apache-2.0 at the dataset level. The individual
+licenses of these upstream repositories, and of the code included in their
+patches and contexts, were not verified in this package. Each record carries a
+base commit in base.sha; consult the upstream repository at that commit for the
+applicable license. See licenses/upstream-repos.md. Do not assume that the
+dataset-level license clears commercial use of the upstream code.
+
+================================================================================
+Heavy bundles
+================================================================================
+
+The heavy-case git bundles are not duplicated in v0.1.0. They remain at
+../hqbd_v0.0.1/hqbd_v0.0.1_agentic_heavy_code_generation_public/ and are
+referenced by BUNDLE_MAPPING.csv. The upstream CVDP terms apply to them.
+
+================================================================================
+No warranty
+================================================================================
+
+The content is provided "as is", without warranty of any kind. No statement in
+this NOTICE is legal advice or a license grant beyond the upstream terms.

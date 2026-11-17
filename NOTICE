@@ -1,0 +1,59 @@
+HQBD NOTICE
+
+## Current release: HQBD v0.1.0
+
+HQBD v0.1.0 fuses two external benchmark sources:
+
+1. **CVDP v1.1.0** (872 cases), copied from the HQBD v0.0.1 package under
+   `hqbd_v0.1.0/` with v0.1.0 filenames. CVDP case content and case IDs are
+   unchanged. See `hqbd_v0.1.0/NOTICE` and `hqbd_v0.0.1/NOTICE` for the
+   preserved CVDP notices.
+2. **HWE-bench** (417 cases), snapshot 2026-09-09, project
+   https://github.com/pku-liang/hwe-bench (Apache-2.0; copy at
+   `hqbd_v0.1.0/LICENSE-HWE-bench`), paper arXiv:2604.14709. HWE-bench records
+   retain their upstream fields and add HQBD provenance/runnability metadata.
+
+HWE-bench derives from six upstream repositories. Their license verification
+status is recorded in `hqbd_v0.1.0/licenses/upstream-repos.md`; licenses are
+not asserted where they were not verified. The HWE-bench dataset card declares
+Apache-2.0 at the dataset level, and the per-record `license` field is empty for
+all 417 records.
+
+Neither CVDP-derived nor HWE-bench-derived content is relicensed as
+HQBD-original content. HWE-bench `fix_patch` and `tb_script` are ground-truth
+and hidden evaluation material.
+
+## HQBD v0.0.1
+
+HQBD v0.0.1 includes benchmark data from CVDP v1.1.0, repackaged under HQBD v0.0.1 file, directory, and case ID naming for dataset organization.
+
+Source:
+
+Comprehensive Verilog Design Problems (CVDP) Benchmark Dataset
+https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset
+
+Included under `hqbd_v0.0.1/`:
+
+- renamed CVDP JSONL benchmark files for commercial and no_commercial splits;
+- renamed CVDP non-agentic code-comprehension JSONL;
+- renamed CVDP public agentic-heavy bundle directory as present in the local upstream checkout;
+- preserved CVDP `LICENSE`, `NOTICE`, and `CHANGELOG`;
+- `ID_MAPPING.csv`, mapping each renamed HQBD case ID to its original CVDP case ID.
+
+CVDP content is not HQBD original content. Third-party notices, source attributions, and license annotations for CVDP are preserved in `hqbd_v0.0.1/NOTICE`.
+
+The JSONL case IDs have been renamed from `cvdp_*` to `hqbd_*`. This renaming is an organizational transformation only. It does not remove or replace the original CVDP attribution, CVDP license terms, or third-party notices.
+
+Heavy bundle filenames and repository references have been renamed from `cvdp_agentic_heavy_*` to `hqbd_agentic_heavy_*` for HQBD organization. Original CVDP bundle filenames are preserved in [BUNDLE_MAPPING.csv](BUNDLE_MAPPING.csv).
+
+## Dataset utility tools
+
+`HQBD/tools/` contains HQBD-adapted helper scripts derived from NVIDIA CVDP benchmark utility tools. The scripts retain their original SPDX copyright and Apache-2.0 license headers.
+
+## Heavy bundle note
+
+The copied CVDP heavy `.bundle` paths may be Git LFS pointer files in the local checkout. A file beginning with `version https://git-lfs.github.com/spec/v1` is not a usable Git bundle. Download and verify real LFS objects before benchmark use or public release of bundle payloads.
+
+## Future HQBD-original content
+
+Future HQBD-original cases should include their own release license and notice terms before public distribution.

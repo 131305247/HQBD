@@ -1,0 +1,54 @@
+FROM ubuntu:24.04
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential git curl ca-certificates \
+    python3 python3-dev python3-pip python3-venv \
+    gperf flex bison autoconf automake libtool make perl help2man \
+    libfl2 libfl-dev zlib1g zlib1g-dev \
+    tcl-dev libreadline-dev libffi-dev pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Sources are pre-cloned on the host (docker/_sources/) and COPYed in to avoid
+# flaky github.com access from inside the build network.
+COPY docker/_sources/iverilog /tmp/iverilog
+RUN cd /tmp/iverilog && sh autoconf.sh && \
+    ./configure --prefix=/usr/local && make -j$(nproc) && make install && \
+    rm -rf /tmp/iverilog
+
+COPY docker/_sources/yosys /tmp/yosys
+# abc (yosys-experimental branch, HEAD e026ed5) is pre-cloned into yosys/abc
+# on the host. ABCREV=default makes the Makefile use abc/ as-is and skip the
+# git fetch (no github access from container) AND the "local modifications"
+# check. Must pass ABCREV=default to BOTH make and make install, otherwise
+# install re-checks against the default ABCREV (0cd90d0) and fails.
+RUN cd /tmp/yosys && make -j$(nproc) PREFIX=/usr/local ABCREV=default && \
+    make install PREFIX=/usr/local ABCREV=default && rm -rf /tmp/yosys
+
+COPY docker/_sources/verilator /tmp/verilator
+RUN cd /tmp/verilator && autoconf && \
+    ./configure --prefix=/usr/local && make -j$(nproc) && make install && \
+    rm -rf /tmp/verilator
+
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH=/root/.local/bin:$PATH
+
+RUN uv venv /venv
+ENV PATH=/venv/bin:$PATH
+
+COPY docker/requirements.txt /tmp/requirements.txt
+# cocotbext-pcie is a git+https dep (line 71 of requirements.txt) that can't be
+# fetched from inside the container (no github access). Pre-clone it on the
+# host, COPY it in. Run `uv pip sync` FIRST with the git line stripped (so sync
+# doesn't try to fetch it), THEN install cocotbext-pcie from the local path
+# afterward -- order matters because `uv pip sync` strictly aligns the env to
+# the requirements file and would uninstall anything not listed in it.
+COPY docker/_sources_cocotbext_pcie /tmp/cocotbext_pcie
+RUN grep -v 'cocotbext-pcie @ git' /tmp/requirements.txt > /tmp/requirements_nogit.txt && \
+    uv pip sync --python /venv/bin/python /tmp/requirements_nogit.txt && \
+    uv pip install --python /venv/bin/python /tmp/cocotbext_pcie && \
+    /venv/bin/python -m ensurepip --upgrade && \
+    ln -sf /venv/bin/pip3 /venv/bin/pip
+
+RUN mkdir -p /code /rundir/harness
+WORKDIR /code

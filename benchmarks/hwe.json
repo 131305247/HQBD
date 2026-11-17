@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "name": "hwe",
+  "description": "HWE-bench (HQBD v0.1.0)",
+  "adapter": "hwe",
+  "select": {
+    "source": "HWE-bench"
+  },
+  "catalog": {
+    "path": "datasets/hqbd_v0.1.0/hqbd_v0.1.0_unified_index.jsonl",
+    "id_field": "hqbd_id",
+    "native_base": "datasets/hqbd_v0.1.0",
+    "native_file_field": "source_file",
+    "native_line_field": "source_line"
+  },
+  "defaults": {
+    "runnable": true,
+    "mode": "agent"
+  },
+  "backend": {
+    "root": "evaluators/hwe",
+    "python": ["uv", "run", "python"],
+    "harbor": ["harbor"],
+    "images": {
+      "registry": "ghcr.io/pku-liang",
+      "local_prefix": "hwebench",
+      "mode": "direct"
+    }
+  },
+  "expect": {
+    "records": 417,
+    "runnable": 172
+  }
+}

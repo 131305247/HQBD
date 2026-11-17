@@ -1,0 +1,55 @@
+HQBD Changelog
+
+================================================================================
+0.1.0
+================================================================================
+
+Fused CVDP + HWE-bench release.
+
+Added
+- HWE-bench native subset: 417 bug-repair cases from 6 repositories.
+  - lowRISC/opentitan: 245
+  - OpenXiangShan/XiangShan: 54
+  - lowRISC/ibex: 35
+  - openhwgroup/cva6: 35
+  - chipsalliance/rocket-chip: 32
+  - chipsalliance/caliptra-rtl: 16
+- Merged HWE file hqbd_v0.1.0_hwe_bench_repair.jsonl and six per-repository
+  files under hqbd_v0.1.0_hwe_bench_repair_by_repo/.
+- Per-case HWE metadata: hqbd_schema_version, hqbd_source_*,
+  hqbd_task_type, hqbd_language, hqbd_representation, hqbd_runnability.
+- Unified cross-source index (1289 rows) in JSONL and CSV, with file:line
+  pointers into the native files.
+- Runnability annotations: 649 cvdp_harness, 100 cvdp_heavy_bundle,
+  123 comprehension_no_harness, 172 docker_image_published, and
+  245 local_build_required (OpenTitan).
+- usage_license field in the unified index.
+- ID_MAPPING.csv extended to 1289 rows; HWE IDs are
+  hqbd_hwe_<repo_slug>_<pr-number>.
+- BUNDLE_MAPPING.csv for v0.1.0, pointing at the v0.0.1 bundle directory.
+- tools/build_hqbd_v0.1.0.py and tools/validate_hqbd_v0.1.0.py.
+- Release-level LICENSE-HWE-bench (Apache-2.0), HEAVY_BUNDLES.md, and
+  licenses/upstream-repos.md.
+
+Changed
+- CVDP files were re-emitted under the v0.1.0 filename prefix. Content and case
+  IDs are unchanged from v0.0.1.
+- Documentation updated for the two-source layout and two runners.
+
+Unchanged
+- hqbd_v0.0.1/ is left untouched.
+- Heavy git bundles are not duplicated; v0.1.0 references the v0.0.1 directory.
+
+Known limitations
+- 245 OpenTitan cases require a locally built image and a Synopsys VCS license.
+- CVDP generation goldens are withheld upstream.
+- CVDP non-agentic harnesses ship a docker-compose stub rather than a complete
+  self-contained evaluation environment.
+- Per-case upstream licenses for HWE repositories were not verified.
+
+================================================================================
+0.0.1
+================================================================================
+
+Initial HQBD packaging of CVDP v1.1.0: 872 cases, renamed cvdp_* -> hqbd_*,
+with ID and bundle mappings, helper tools, and documentation.

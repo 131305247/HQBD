@@ -1,0 +1,29 @@
+HQBD LICENSE
+
+This package contains content under multiple license scopes.
+
+## HQBD v0.0.1 content
+
+HQBD v0.0.1 is derived from CVDP v1.1.0 and repackages it under HQBD file, directory, and case ID naming for dataset organization. The CVDP content and third-party-derived content included in `hqbd_v0.0.1/` are not relicensed as HQBD original content.
+
+The JSONL case IDs have been renamed from `cvdp_*` to `hqbd_*`. The mapping from HQBD IDs to original CVDP IDs is provided in `hqbd_v0.0.1/ID_MAPPING.csv`.
+
+## CVDP v1.1.0 source and licenses
+
+Source dataset:
+
+Comprehensive Verilog Design Problems (CVDP) Benchmark Dataset
+https://huggingface.co/datasets/nvidia/cvdp-benchmark-dataset
+
+For preserved CVDP licensing information, see:
+
+- `hqbd_v0.0.1/LICENSE`
+- `hqbd_v0.0.1/NOTICE`
+
+The preserved CVDP license states that dataset non-code is under CC BY 4.0, dataset code is under Apache License 2.0, and third-party code-derived datapoints or public Git context bundles may be governed by additional or different upstream license terms listed in NOTICE.
+
+## HQBD original content
+
+The final license for future HQBD-original benchmark cases, documentation, and release metadata has not yet been selected. Until a final license is chosen, treat HQBD-original draft content as project-internal material unless a release explicitly states otherwise.
+
+Do not assume that all files in this package share a single license unless a future release explicitly states that.

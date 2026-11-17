@@ -1,0 +1,32 @@
+services:
+  sim:
+    image: nvidia/cvdp-sim:v1.0.0
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.sim.local
+    working_dir: /code
+    volumes:
+      - .:/code
+    environment:
+      OSS_SIM_IMAGE: nvidia/cvdp-sim:v1.0.0
+      OSS_PNR_IMAGE: nvidia/cvdp-sim:v1.0.0
+    command: >
+      bash -lc "iverilog -V | head -n 1 &&
+      yosys -V &&
+      verilator --version &&
+      python -c 'import cocotb; print(\"cocotb\", cocotb.__version__)'"
+
+  shell:
+    image: nvidia/cvdp-sim:v1.0.0
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.sim.local
+    working_dir: /code
+    volumes:
+      - .:/code
+    environment:
+      OSS_SIM_IMAGE: nvidia/cvdp-sim:v1.0.0
+      OSS_PNR_IMAGE: nvidia/cvdp-sim:v1.0.0
+    entrypoint: /bin/bash
+    stdin_open: true
+    tty: true

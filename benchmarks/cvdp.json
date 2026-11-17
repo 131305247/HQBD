@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "name": "cvdp",
+  "description": "CVDP v1.1.0 (HQBD v0.1.0)",
+  "adapter": "cvdp",
+  "select": {
+    "source": "CVDP"
+  },
+  "catalog": {
+    "path": "datasets/hqbd_v0.1.0/hqbd_v0.1.0_unified_index.jsonl",
+    "id_field": "hqbd_id",
+    "native_base": "datasets/hqbd_v0.1.0",
+    "native_file_field": "source_file",
+    "native_line_field": "source_line"
+  },
+  "defaults": {
+    "runnable": true,
+    "mode": "llm"
+  },
+  "backend": {
+    "root": "evaluators/cvdp",
+    "python": ["python"],
+    "heavy_repos_path": "datasets/hqbd_v0.0.1/hqbd_v0.0.1_agentic_heavy_code_generation_public"
+  },
+  "expect": {
+    "records": 872,
+    "runnable": 749
+  }
+}

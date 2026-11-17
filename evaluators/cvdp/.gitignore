@@ -1,0 +1,18 @@
+cvdp_*
+*.json
+*.jsonl
+!/example_dataset/*.jsonl
+*.log
+__pycache__
+/.env
+/custom_factory
+work*/
+work_*.txt
+/dataset_analysis*
+/refinement_analysis*
+/failure_analysis*/
+/model_sweep_results*
+
+# Local tooling metadata (not part of CVDP framework)
+/.wolf/
+/.claude/
