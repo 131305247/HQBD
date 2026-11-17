@@ -1,0 +1,13 @@
+# Keep dataset/package text files stable across platforms
+*.md text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.jsonl text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.gitignore text eol=lf
+*.gitattributes text eol=lf
+
+# Heavy repository bundle payloads are stored with Git LFS in dataset hosting repositories
+datasets/hqbd_v0.0.1/hqbd_v0.0.1_agentic_heavy_code_generation_public/*.bundle filter=lfs diff=lfs merge=lfs -text
